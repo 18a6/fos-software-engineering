@@ -25,6 +25,45 @@ class Book(Base):
     def __repr__(self) -> str:
         return f"Book(id={self.id!r}, Title={self.title!r}, Author={self.author!r}, Description={self.description!r}, Year published={self.year_published!r})"
     
-table = Base.metadata.create_all(engine)
-print(table)
+Base.metadata.create_all(engine)
 
+"""Now inserting data in the database by creating instances of Book which have an `__init__()` method as established automatically by the declarative mapping process.
+We then pass them to the database using an object called a `Session`, which makes use of the Engine to interact with the database.
+"""
+
+from sqlalchemy.orm import Session
+
+with Session(engine) as session:
+    book1 = Book(
+        title="Gödel, Escher, Bach: an Eternal Golden Braid",
+        author="Douglas Hofstadter",
+        description="Gödel, Escher, Bach: an Eternal Golden Braid, also known as GEB, is a 1979 book by Douglas Hofstadter. By exploring common themes in the lives and works of logician Kurt Gödel, artist M. C. Escher, and composer Johann Sebastian Bach, the book expounds concepts fundamental to mathematics, symmetry, and intelligence.",
+        year_published ="1979"
+    )
+    book2 = Book(
+        title="Gödel, Escher, Bach: an Eternal Golden Braid",
+        author="Douglas Hofstadter",
+        description="Gödel, Escher, Bach: an Eternal Golden Braid, also known as GEB, is a 1979 book by Douglas Hofstadter. By exploring common themes in the lives and works of logician Kurt Gödel, artist M. C. Escher, and composer Johann Sebastian Bach, the book expounds concepts fundamental to mathematics, symmetry, and intelligence.",
+        year_published ="1979"
+    )
+    book3 = Book(
+        title="Gödel, Escher, Bach: an Eternal Golden Braid",
+        author="Douglas Hofstadter",
+        description="Gödel, Escher, Bach: an Eternal Golden Braid, also known as GEB, is a 1979 book by Douglas Hofstadter. By exploring common themes in the lives and works of logician Kurt Gödel, artist M. C. Escher, and composer Johann Sebastian Bach, the book expounds concepts fundamental to mathematics, symmetry, and intelligence.",
+        year_published ="1979"
+    )
+    book4 = Book(
+        title="Gödel, Escher, Bach: an Eternal Golden Braid",
+        author="Douglas Hofstadter",
+        description="Gödel, Escher, Bach: an Eternal Golden Braid, also known as GEB, is a 1979 book by Douglas Hofstadter. By exploring common themes in the lives and works of logician Kurt Gödel, artist M. C. Escher, and composer Johann Sebastian Bach, the book expounds concepts fundamental to mathematics, symmetry, and intelligence.",
+        year_published ="1979"
+    )
+    book5 = Book(
+        title="Gödel, Escher, Bach: an Eternal Golden Braid",
+        author="Douglas Hofstadter",
+        description="Gödel, Escher, Bach: an Eternal Golden Braid, also known as GEB, is a 1979 book by Douglas Hofstadter. By exploring common themes in the lives and works of logician Kurt Gödel, artist M. C. Escher, and composer Johann Sebastian Bach, the book expounds concepts fundamental to mathematics, symmetry, and intelligence.",
+        year_published ="1979"
+    )
+    
+    session.add_all([book1, book2, book3, book4, book5])
+    session.commit()
