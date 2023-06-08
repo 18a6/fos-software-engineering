@@ -73,14 +73,3 @@ with Session(engine) as session:
     books = session.add_all([book1, book2, book3, book4, book5])
     session.commit()
 
-from sqlalchemy import select
-from sqlalchemy.orm import Session
-
-from m1 import engine
-
-session = Session(engine)
-
-stmt = select(Book).where(Book.author.in_(["book1", "book2"]))
-
-for user in session.scalars(stmt):
-    print(user)
