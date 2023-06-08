@@ -9,6 +9,7 @@ from sqlalchemy import String
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
+from m1 import engine
 
 class Base(DeclarativeBase):
     pass
@@ -23,3 +24,7 @@ class Book(Base):
 
     def __repr__(self) -> str:
         return f"Book(id={self.id!r}, Title={self.title!r}, Author={self.author!r}, Description={self.description!r}, Year published={self.year_published!r})"
+    
+table = Base.metadata.create_all(engine)
+print(table)
+
